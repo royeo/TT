@@ -369,15 +369,15 @@ int check_login_record()
 	}
 	    
 	//有登录记录
-	if(my_strlen(result[3]) > 0)
+	if(strlen(result[3]) > 0)
 	{
-	    my_strcpy(msg.user, result[3]);
-	    my_strcpy(msg.password, result[5]);
+	    strcpy(msg.user, result[3]);
+	    strcpy(msg.password, result[5]);
 	}
 	else
 	{
-	    my_strcpy(msg.user, result[4]);
-	    my_strcpy(msg.password, result[5]);
+	    strcpy(msg.user, result[4]);
+	    strcpy(msg.password, result[5]);
 	}
 
 	//将帐号密码显示在主界面上
@@ -387,7 +387,7 @@ int check_login_record()
 	
 	int i;
 	wmove(menu_win[3], 1, 2);
-	for(i = 0; i < my_strlen(msg.password); i++)
+	for(i = 0; i < strlen(msg.password); i++)
 	{
 		wprintw(menu_win[3], "*");
 	}
@@ -413,7 +413,7 @@ int check_login_record()
 	    //登录成功
 		case LOGIN_OK:    
 		{
-			my_strcpy(active_user, back_msg.user);   //保存当前用户名
+			strcpy(active_user, back_msg.user);   //保存当前用户名
 			wclear(menu_win[0]);
 			box(menu_win[0], 0, 0);
 			box(menu_win[4], 0, 0);

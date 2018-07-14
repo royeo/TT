@@ -101,7 +101,7 @@ void password_back_opt()
 	//输入帐号
 	mvwscanw(manage_win[1], 1, 2, "%s", msg.user);
 				
-	if(my_strlen(msg.user) > 0)
+	if(strlen(msg.user) > 0)
 	{
 		msg.action = CHECK_ACCOUNT;
 		
@@ -214,7 +214,7 @@ void password_back_opt()
 					mvwprintw(manage_win[7], 1, 2, "                    ");
 					mvwscanw(manage_win[7], 1, 2, "%s", answer);
 
-					if(my_strcmp(answer, back_msg.answer) == 0)
+					if(strcmp(answer, back_msg.answer) == 0)
 					{
 						curs_set(false);  
 				    	mvwprintw(manage_win[5], 11, 14, "您的密码：%s", back_msg.password); 

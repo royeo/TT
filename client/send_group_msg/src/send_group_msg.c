@@ -21,10 +21,10 @@ void send_group_msg()
 	bzero(&msg, sizeof(msg));
 	mvwgetstr(chat_win[1], 0, 0, msg.message);
 
-	if(my_strlen(msg.message) > 0)
+	if(strlen(msg.message) > 0)
 	{
 		msg.action = SEND_GROUP_MSG;
-		my_strcpy(msg.user, current_user);
+		strcpy(msg.user, current_user);
 	
 		if(send(sockfd, &msg, sizeof(msg), 0) == -1)
 		{
@@ -200,31 +200,31 @@ void send_group_expression()
 					{
 						case 3:
 						{	
-							my_strcpy(expression, "(^_^)");
+							strcpy(expression, "(^_^)");
 							expression_choose_mark = EXIT;
 							break;
 						}
 						case 12:
 						{
-							my_strcpy(expression, "(0.0)");
+							strcpy(expression, "(0.0)");
 							expression_choose_mark = EXIT;
 							break;
 						}
 						case 21:
 						{
-							my_strcpy(expression, "(=_=)");
+							strcpy(expression, "(=_=)");
 							expression_choose_mark = EXIT;
 							break;
 						}
 						case 30:
 						{
-							my_strcpy(expression, "(>_<)");
+							strcpy(expression, "(>_<)");
 							expression_choose_mark = EXIT;
 							break;
 						}
 						case 39:
 						{
-							my_strcpy(expression, "(+_+)");
+							strcpy(expression, "(+_+)");
 							expression_choose_mark = EXIT;
 							break;
 						}
@@ -243,31 +243,31 @@ void send_group_expression()
 					{
 						case 3:
 						{
-							my_strcpy(expression, "(T_T)");
+							strcpy(expression, "(T_T)");
 							expression_choose_mark = EXIT;
 							break;
 						}
 						case 12:
 						{
-							my_strcpy(expression, "($_$)");
+							strcpy(expression, "($_$)");
 							expression_choose_mark = EXIT;
 							break;
 						}
 						case 21:
 						{
-							my_strcpy(expression, "(~_~)");
+							strcpy(expression, "(~_~)");
 							expression_choose_mark = EXIT;
 							break;
 						}
 						case 30:
 						{
-							my_strcpy(expression, "(W_W)");
+							strcpy(expression, "(W_W)");
 							expression_choose_mark = EXIT;
 							break;
 						}
 						case 39:
 						{
-							my_strcpy(expression, "(Q_Q)");
+							strcpy(expression, "(Q_Q)");
 							expression_choose_mark = EXIT;
 							break;
 						}
@@ -315,7 +315,7 @@ void send_group_expression()
 	fclose(fp);
 
 	//选择完表情之后的消息输入
-	if(my_strlen(expression) > 0)
+	if(strlen(expression) > 0)
 	{
 		char message[1024];
 		Message msg;
@@ -328,11 +328,11 @@ void send_group_expression()
 		wgetstr(chat_win[1], message);
 		sprintf(msg.message, "%s%s", expression, message);
 
-		if(my_strlen(msg.message) > 0)
+		if(strlen(msg.message) > 0)
 		{
 			msg.action = SEND_GROUP_MSG;
-			my_strcpy(msg.user, current_user);
-			my_strcpy(msg.target, current_target);
+			strcpy(msg.user, current_user);
+			strcpy(msg.target, current_target);
 	
 			if(send(sockfd, &msg, sizeof(msg), 0) == -1)
 			{
@@ -513,49 +513,49 @@ void send_group_phrase()
 
 				if(y == 3)
 				{
-					my_strcpy(phrase,"You bet!");
+					strcpy(phrase,"You bet!");
 					phrase_choose_mark = EXIT;
 					break;
 				}
 				if(y == 4)
 				{
-					my_strcpy(phrase, "Sure thing.");
+					strcpy(phrase, "Sure thing.");
 					phrase_choose_mark = EXIT;
 					break;
 				}
 				if(y == 5)
 				{
-					my_strcpy(phrase, "Take it easy.");
+					strcpy(phrase, "Take it easy.");
 					phrase_choose_mark = EXIT;
 					break;
 				}
 				if(y == 6)
 				{
-					my_strcpy(phrase, "Good for you!");
+					strcpy(phrase, "Good for you!");
 					phrase_choose_mark = EXIT;
 					break;
 				} 
 				if(y == 7)
 				{
-					my_strcpy(phrase, "You are welcome.");
+					strcpy(phrase, "You are welcome.");
 					phrase_choose_mark = EXIT;
 					break;
 				}
 				if(y == 8)
 				{
-					my_strcpy(phrase, "I swear by the god.");
+					strcpy(phrase, "I swear by the god.");
 					phrase_choose_mark = EXIT;
 					break;
 				} 
 				if(y == 9)
 				{
-					my_strcpy(phrase, "Have a good of it.");
+					strcpy(phrase, "Have a good of it.");
 					phrase_choose_mark = EXIT;
 					break;
 				}
 				if(y == 10)
 				{
-					my_strcpy(phrase, "I will play it by ear.");
+					strcpy(phrase, "I will play it by ear.");
 					phrase_choose_mark = EXIT;
 					break;
 				} 
@@ -596,13 +596,13 @@ void send_group_phrase()
 	wrefresh(chat_win[10]);
 	fclose(fp);
 
-	if(my_strlen(phrase) > 0)
+	if(strlen(phrase) > 0)
 	{
 		Message msg;
 		msg.action = SEND_GROUP_MSG;
-		my_strcpy(msg.user, current_user);
-		my_strcpy(msg.target, current_target);
-		my_strcpy(msg.message, phrase);
+		strcpy(msg.user, current_user);
+		strcpy(msg.target, current_target);
+		strcpy(msg.message, phrase);
 	
 		if(send(sockfd, &msg, sizeof(msg), 0) == -1)
 		{
@@ -623,7 +623,7 @@ void send_group_notice()
 
 	bzero(&msg, sizeof(msg));
 	msg.action = CHANGE_GROUP_NOTICE;
-	my_strcpy(msg.user, current_user);
+	strcpy(msg.user, current_user);
 
 	curs_set(true);
 	echo();
@@ -632,7 +632,7 @@ void send_group_notice()
 	mvwscanw(chat_win[9], 0, 0, "%s", msg.message);	
 	wrefresh(chat_win[9]);
 
-	if(my_strlen(msg.message) > 0)
+	if(strlen(msg.message) > 0)
 	{
 		if(send(sockfd, &msg, sizeof(msg), 0) == -1)
 		{

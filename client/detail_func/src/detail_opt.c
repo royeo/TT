@@ -67,19 +67,19 @@ int update_time(char *now_time)
 		return NO;
 	} 
 	    
-	my_strcpy(last_time, now_time);
+	strcpy(last_time, now_time);
 	return YES;
 }
 
 //更新日期
 int update_data(char *now_data)
 {
-	if(my_strcmp(now_data, last_data) == 0)
+	if(strcmp(now_data, last_data) == 0)
 	{
 		return NO;
 	}
 
-	my_strcpy(last_data, now_data);
+	strcpy(last_data, now_data);
 	return YES;
 }
 
@@ -131,7 +131,7 @@ void password_input(char *password)
 	echo();
 	nocbreak();
 	buf[i] = '\0';
-	my_strcpy(password, buf);
+	strcpy(password, buf);
 }
 
 //继续或退出
@@ -178,9 +178,9 @@ void search_signature(char *target, char *target_signature)
 
 	while(temp != NULL)
 	{
-	    if(my_strcmp(target, temp->user) == 0)
+	    if(strcmp(target, temp->user) == 0)
 		{
-		    my_strcpy(target_signature, temp->signature);
+		    strcpy(target_signature, temp->signature);
 			break;
 		}
 
@@ -195,7 +195,7 @@ int get_friend_state(char *friend)
 
 	while(temp != NULL)
 	{
-	    if(my_strcmp(temp->user, friend) == 0)
+	    if(strcmp(temp->user, friend) == 0)
 		{
 		    if(temp->state == FRIEND_ONLINE)
 			{
@@ -219,7 +219,7 @@ void get_group_notice()
     Message msg;
 
 	msg.action = GROUP_NOTICE;
-	my_strcpy(msg.user, current_user);
+	strcpy(msg.user, current_user);
 
 	if(send(sockfd, &msg, sizeof(msg), 0) == -1)
 	{
@@ -234,7 +234,7 @@ void get_advert_info()
     Message msg;
 
 	msg.action = ADVERT_INFO;
-	my_strcpy(msg.user, current_user);
+	strcpy(msg.user, current_user);
 
 	if(send(sockfd, &msg, sizeof(msg), 0) == -1)
 	{
@@ -249,7 +249,7 @@ void open_anonymity()
     Message msg;
 
 	msg.action = OPEN_ANONYMITY;
-	my_strcpy(msg.user, current_user);
+	strcpy(msg.user, current_user);
 
 	if(send(sockfd, &msg, sizeof(msg), 0) == -1)
 	{
@@ -264,7 +264,7 @@ void close_anonymity()
     Message msg;
 
 	msg.action = CLOSE_ANONYMITY;
-	my_strcpy(msg.user, current_user);
+	strcpy(msg.user, current_user);
 
 	if(send(sockfd, &msg, sizeof(msg), 0) == -1)
 	{
@@ -322,6 +322,6 @@ void password_input_win(WINDOW *win, char *password)
 	echo();
 	nocbreak();
 	buf[i] = '\0';
-	my_strcpy(password, buf);
+	strcpy(password, buf);
 }
 

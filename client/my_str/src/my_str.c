@@ -5,14 +5,14 @@
 *   Version：       1.0
 *   Date：          2015/07/16
 *   Description：	字符串操作
-*   Function List： my_strlen() my_strcmp()
-*					my_strcpy()
+*   Function List： strlen() strcmp()
+*					strcpy()
 * 
 ==========================================*/
 
 #include "../../include/myhead.h"
 
-int my_strlen(const char *s)
+int strlen(const char *s)
 {
     int count = 0;
 
@@ -26,7 +26,7 @@ int my_strlen(const char *s)
 }
 
 
-char *my_strcpy(char *dest, const char *src)
+char *strcpy(char *dest, const char *src)
 {
     char *temp;
    
@@ -44,14 +44,14 @@ char *my_strcpy(char *dest, const char *src)
     return dest;
 }
 
-int my_strcmp(const char *s1, const char *s2)
+int strcmp(const char *s1, const char *s2)
 {
-    if(my_strlen(s1) > my_strlen(s2))
+    if(strlen(s1) > strlen(s2))
     {
         return 1;
     }
     
-    if(my_strlen(s1) < my_strlen(s2))
+    if(strlen(s1) < strlen(s2))
     {
         return -1;
     }  

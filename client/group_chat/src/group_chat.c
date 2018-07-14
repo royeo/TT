@@ -342,7 +342,7 @@ void group_chat_choose()
 
 	if(anonymity_chat_mark == YES)
 	{
-		my_strcpy(current_user, casual_user);
+		strcpy(current_user, casual_user);
 	}
 }
 

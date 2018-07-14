@@ -61,7 +61,7 @@ void chat_ui()
 	mvwprintw(chat_win[0], 1, 3, "%s", current_target);       //打印聊天目标
 
 	search_signature(current_target, target_signature);
-	if(my_strlen(target_signature) > 0)
+	if(strlen(target_signature) > 0)
 	{
 		mvwprintw(chat_win[0], 3, 3, "%s", target_signature);  //打印聊天目标的个性签名
 	}

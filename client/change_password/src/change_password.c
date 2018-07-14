@@ -78,7 +78,7 @@ void change_password_opt()
 	wmove(manage_win[1], 1, 2);
 	password_input_win(manage_win[1], msg.message);
 	
-	if(my_strlen(msg.message) == 0)
+	if(strlen(msg.message) == 0)
 	{
 		change_password_mark = CHANGE_PASSWORD_FAIL;
 		mvwprintw(manage_win[0], 6, 52, "当前密码为空");
@@ -91,7 +91,7 @@ void change_password_opt()
 	
 	int len = strlen(msg.password);
 	
-	if(my_strcmp(msg.message, msg.password) != 0)
+	if(strcmp(msg.message, msg.password) != 0)
 	{
 		if(len <= 6 && len >= 1)
 		{
@@ -126,7 +126,7 @@ void change_password_opt()
 	wmove(manage_win[3], 1, 2);
 	password_input_win(manage_win[3], password);
 
-	if(my_strcmp(password, msg.password) == 0 && my_strlen(msg.password) > 0)
+	if(strcmp(password, msg.password) == 0 && strlen(msg.password) > 0)
 	{
 		mvwprintw(manage_win[0], 15, 52, "密码正确");
 		wrefresh(manage_win[0]);
@@ -169,7 +169,7 @@ void change_password_opt()
 	else  //操作成功，向服务器发送修改密码的请求
 	{
 		msg.action = CHANGE_PASSWORD;
-		my_strcpy(msg.user, current_user);
+		strcpy(msg.user, current_user);
 
 		if(send(sockfd, &msg, sizeof(msg), 0) == -1)
 		{

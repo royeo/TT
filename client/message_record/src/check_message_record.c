@@ -52,8 +52,8 @@ void check_message_record()
 	Message msg;
 	bzero(&msg, sizeof(msg));
 	msg.action = CHECK_MSG_RECORD;
-	my_strcpy(msg.user, current_user);
-	my_strcpy(msg.target, current_target);
+	strcpy(msg.user, current_user);
+	strcpy(msg.target, current_target);
 
 	if(send(sockfd, &msg, sizeof(msg), 0) == -1)
 	{
@@ -90,7 +90,7 @@ void check_message_record()
 	if(row <= 5 && row > 0)
 	{
 		mvwprintw(chat_win[7], record_row, 0, "---------  %s  ---------", result[column]);
-		my_strcpy(last_data, result[column]);
+		strcpy(last_data, result[column]);
 		wrefresh(chat_win[7]);
 		record_row += 1;
 		
@@ -112,7 +112,7 @@ void check_message_record()
 	else if(row > 5)
 	{
 		mvwprintw(chat_win[7], record_row, 0, "---------  %s  ---------", result[(row - row % 5 + 1)* column]);
-		my_strcpy(last_data, result[(row - row % 5 + 1) * column]);
+		strcpy(last_data, result[(row - row % 5 + 1) * column]);
 		wrefresh(chat_win[7]);
 		record_row += 1;
 
@@ -197,7 +197,7 @@ void check_message_record()
 				record_row = 0;
 				wclear(chat_win[7]);
 				mvwprintw(chat_win[7], record_row, 0, "---------  %s  ---------", result[(chat_record_site - 5) * column]);
-				my_strcpy(last_data, result[(chat_record_site - 5) * column]);
+				strcpy(last_data, result[(chat_record_site - 5) * column]);
 				record_row += 1;
 	    			
 				for(i = chat_record_site - 5; i <= chat_record_site - 1; i++)
@@ -233,7 +233,7 @@ void check_message_record()
 				record_row = 0;
 				wclear(chat_win[7]);
 				mvwprintw(chat_win[7], record_row, 0, "---------  %s  ---------", result[(chat_record_site + 5) * column]);
-				my_strcpy(last_data, result[(chat_record_site + 5) * column]);
+				strcpy(last_data, result[(chat_record_site + 5) * column]);
 				record_row += 1;
 	    			
 				for(i = chat_record_site + 5; i <= chat_record_site + 9; i++)
@@ -272,8 +272,8 @@ void check_message_record()
 					Message msg;
 
 					msg.action = DEL_MSG_RECORD;
-					my_strcpy(msg.user, current_user);
-					my_strcpy(msg.target, current_target);
+					strcpy(msg.user, current_user);
+					strcpy(msg.target, current_target);
 
 					if(send(sockfd, &msg, sizeof(msg), 0) == -1)
 					{
@@ -412,7 +412,7 @@ void check_group_msg_record()
 	if(row <= 5 && row > 0)
 	{
 		mvwprintw(chat_win[7], record_row, 0, "---------  %s  ---------", result[column]);
-		my_strcpy(last_data, result[column]);
+		strcpy(last_data, result[column]);
 		wrefresh(chat_win[7]);
 		record_row += 1;
 		
@@ -434,7 +434,7 @@ void check_group_msg_record()
 	else if(row > 5)
 	{
 		mvwprintw(chat_win[7], record_row, 0, "---------  %s  ---------", result[(row - row % 5 + 1)* column]);
-		my_strcpy(last_data, result[(row - row % 5 + 1) * column]);
+		strcpy(last_data, result[(row - row % 5 + 1) * column]);
 		wrefresh(chat_win[7]);
 		record_row += 1;
 
@@ -519,7 +519,7 @@ void check_group_msg_record()
 				record_row = 0;
 				wclear(chat_win[7]);
 				mvwprintw(chat_win[7], record_row, 0, "---------  %s  ---------", result[(chat_record_site - 5) * column]);
-				my_strcpy(last_data, result[(chat_record_site - 5) * column]);
+				strcpy(last_data, result[(chat_record_site - 5) * column]);
 				record_row += 1;
 	    			
 				for(i = chat_record_site - 5; i <= chat_record_site - 1; i++)
@@ -555,7 +555,7 @@ void check_group_msg_record()
 				record_row = 0;
 				wclear(chat_win[7]);
 				mvwprintw(chat_win[7], record_row, 0, "---------  %s  ---------", result[(chat_record_site + 5) * column]);
-				my_strcpy(last_data, result[(chat_record_site + 5) * column]);
+				strcpy(last_data, result[(chat_record_site + 5) * column]);
 				record_row += 1;
 	    			
 				for(i = chat_record_site + 5; i <= chat_record_site + 9; i++)

@@ -39,7 +39,7 @@ void friend_ui()
 
     mvwprintw(friend_win[1], 0, 0, "%s", current_user);
 	
-	if(my_strlen(current_signature) > 0)
+	if(strlen(current_signature) > 0)
 	{
 		mvwprintw(friend_win[2], 0, 0, "%s", current_signature);
 	}
@@ -464,12 +464,12 @@ void friend_choose()
 						}
 						else if(friend_list[13] == "group")
 						{
-							my_strcpy(current_target, "group");
+							strcpy(current_target, "group");
 						    group_chat();
 						}
 						else
 						{
-							my_strcpy(current_target, friend_list[13]);
+							strcpy(current_target, friend_list[13]);
 							chat();
 						}
 						
@@ -494,12 +494,12 @@ void friend_choose()
 						}
 						else if(friend_list[15] == "group")
 						{
-							my_strcpy(current_target, "group");
+							strcpy(current_target, "group");
 						    group_chat();
 						}
 						else
 						{
-							my_strcpy(current_target, friend_list[15]);
+							strcpy(current_target, friend_list[15]);
 							chat();
 						}
 
@@ -524,12 +524,12 @@ void friend_choose()
 						}
 						else if(friend_list[17] == "group")
 						{
-							my_strcpy(current_target, "group");
+							strcpy(current_target, "group");
 						    group_chat();
 						}
 						else
 						{
-							my_strcpy(current_target, friend_list[17]);
+							strcpy(current_target, friend_list[17]);
 							chat();
 						}
 						
@@ -554,12 +554,12 @@ void friend_choose()
 						}
 						else if(friend_list[19] == "group")
 						{
-							my_strcpy(current_target, "group");
+							strcpy(current_target, "group");
 						    group_chat();
 						}
 						else
 						{
-							my_strcpy(current_target, friend_list[19]);
+							strcpy(current_target, friend_list[19]);
 							chat();
 						}
 						
@@ -584,12 +584,12 @@ void friend_choose()
 						}
 						else if(friend_list[21] == "group")
 						{
-							my_strcpy(current_target, "group");
+							strcpy(current_target, "group");
 						    group_chat();
 						}
 						else
 						{
-							my_strcpy(current_target, friend_list[21]);
+							strcpy(current_target, friend_list[21]);
 							chat();
 						}
 						
@@ -614,12 +614,12 @@ void friend_choose()
 						}
 						else if(friend_list[23] == "group")
 						{
-							my_strcpy(current_target, "group");
+							strcpy(current_target, "group");
 						    group_chat();
 						}
 						else
 						{
-							my_strcpy(current_target, friend_list[23]);
+							strcpy(current_target, friend_list[23]);
 							chat();
 						}
 				

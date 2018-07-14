@@ -26,9 +26,9 @@ void search_friend()
 	
 	while(temp != NULL)
 	{
-	    if(my_strcmp(temp->user, friend_name) == 0)
+	    if(strcmp(temp->user, friend_name) == 0)
 		{
-			my_strcpy(current_target, friend_name);
+			strcpy(current_target, friend_name);
 			chat();
 			break;
 		}

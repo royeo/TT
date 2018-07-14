@@ -24,15 +24,15 @@ void modify_signature()
 
 	curs_set(false);
 	
-	if(my_strlen(signature) > 0)
+	if(strlen(signature) > 0)
 	{
-		my_strcpy(current_signature, signature);
+		strcpy(current_signature, signature);
 		mvwprintw(friend_win[2], 0, 0, "%s", signature);
 		wrefresh(friend_win[2]);
 
 		msg.action = MODIFY_SIGNATURE;
-		my_strcpy(msg.user, current_user);
-		my_strcpy(msg.signature, signature);
+		strcpy(msg.user, current_user);
+		strcpy(msg.signature, signature);
 
 		if(send(sockfd, &msg, sizeof(msg), 0) == -1)
 		{
@@ -40,7 +40,7 @@ void modify_signature()
 			exit(1);
 		}
 	}
-	else if(my_strlen(current_signature) > 0)
+	else if(strlen(current_signature) > 0)
 	{
 		mvwprintw(friend_win[2], 0, 0, "%s", current_signature);
 		wrefresh(friend_win[2]);

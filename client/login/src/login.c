@@ -56,8 +56,8 @@ void login()
 			login_mark = LOGIN_OK;   //将登录标志设为成功
 			memset(current_signature, 0, sizeof(current_signature));
 
-			my_strcpy(current_user, back_msg.user);             //保存当前用户名
-			my_strcpy(current_signature, back_msg.signature);   //保存当前个性签名
+			strcpy(current_user, back_msg.user);             //保存当前用户名
+			strcpy(current_signature, back_msg.signature);   //保存当前个性签名
 
 			//打开保存好友聊天记录的数据库
 			if(sqlite3_open("MsgEx.db", &db) != SQLITE_OK)
@@ -81,7 +81,7 @@ void login()
 			box(menu_win[4], 0, 0);
 			mvwprintw(menu_win[0], 12, 1, "——————————————————————————————————————————————————————————");
 			mvwprintw(menu_win[0], 1, 54, "EXIT");
-			mvwprintw(menu_win[0], 19, (60 - my_strlen(current_user)) / 2, "%s", current_user);
+			mvwprintw(menu_win[0], 19, (60 - strlen(current_user)) / 2, "%s", current_user);
 			mvwprintw(menu_win[4], 1, 8, "  登  录  中     ");  
 			
 			wrefresh(menu_win[0]);

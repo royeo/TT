@@ -101,7 +101,7 @@ void reg_opt()
 	
 	mvwscanw(reg_win[1], 1, 2, "%s", msg.user);
 				
-	if(my_strlen(msg.user) > 0)
+	if(strlen(msg.user) > 0)
 	{
 		msg.action = CHECK_ACCOUNT;
 		
@@ -174,7 +174,7 @@ void reg_opt()
 	move(12, 52);
 	password_input(msg.password);
 
-	if(my_strcmp(password, msg.password) == 0 && my_strlen(msg.password) > 0)
+	if(strcmp(password, msg.password) == 0 && strlen(msg.password) > 0)
 	{
 		mvwprintw(reg_win[0], 12, 52, "密码正确");
 		wrefresh(reg_win[0]);

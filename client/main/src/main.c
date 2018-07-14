@@ -21,7 +21,7 @@ void show_msg(void *arg)
 	Chat_Msg *temp;
 	Chat_Msg *ptr;
 	
-	my_strcpy(user, (char *)arg);
+	strcpy(user, (char *)arg);
 
     while(1)
 	{
@@ -35,7 +35,7 @@ void show_msg(void *arg)
 		//如果有该好友的消息
 		while(temp != NULL)
 		{
-			if(my_strcmp(temp->user, user) == 0)
+			if(strcmp(temp->user, user) == 0)
 			{
 				msg_prompt_mark = 1;
 
@@ -49,7 +49,7 @@ void show_msg(void *arg)
 					wrefresh(friend_win[0]);
 				}
 					
-				while(my_strcmp(current_target, user) != 0)
+				while(strcmp(current_target, user) != 0)
 				{
 					for(i = 1 ; i < 30; i++)
 					{
@@ -58,7 +58,7 @@ void show_msg(void *arg)
 							continue;
 						}
 
-		    			if(my_strcmp(friend_list[i], user) == 0)
+		    			if(strcmp(friend_list[i], user) == 0)
 						{
 							break;
 						}
@@ -103,9 +103,9 @@ void show_msg(void *arg)
 			temp = chat_msg_head->next;
 			while(temp != NULL)
 			{
-				if(my_strcmp(temp->user, user) == 0)
+				if(strcmp(temp->user, user) == 0)
 				{
-					if(my_strlen(temp->target) > 0)			//如果是文件
+					if(strlen(temp->target) > 0)			//如果是文件
 					{
 						if(chat_row == 14 || chat_row == 15)
 						{
@@ -116,7 +116,7 @@ void show_msg(void *arg)
 						if(update_time(temp->time) == YES)
 						{
 							chat_row -= 1;
-							mvwprintw(chat_win[2], chat_row++, (49 - my_strlen(temp->time)) / 2, "%s", temp->time);
+							mvwprintw(chat_win[2], chat_row++, (49 - strlen(temp->time)) / 2, "%s", temp->time);
 						}
 						mvwprintw(chat_win[2], chat_row++, 0, "[^_^] [%s] (成功接收文件)", temp->target);
 						chat_row++;
@@ -138,7 +138,7 @@ void show_msg(void *arg)
 					if(update_time(temp->time) == YES)
 					{
 						chat_row -= 1;
-						mvwprintw(chat_win[2], chat_row++, (49 - my_strlen(temp->time)) / 2, "%s", temp->time);
+						mvwprintw(chat_win[2], chat_row++, (49 - strlen(temp->time)) / 2, "%s", temp->time);
 					}	
 					mvwprintw(chat_win[2], chat_row++, 0, "[^_^] %s", temp->message);
 					chat_row++;
@@ -186,7 +186,7 @@ void show_group_msg()
 
 		while(temp != NULL)
 		{
-			if(my_strcmp(temp->target, "group") == 0)
+			if(strcmp(temp->target, "group") == 0)
 			{
 				msg_prompt_mark = 1;
 				
@@ -199,7 +199,7 @@ void show_group_msg()
 							continue;
 						}
 
-				    	if(my_strcmp(friend_list[i], "my_group") == 0)
+				    	if(strcmp(friend_list[i], "my_group") == 0)
 						{
 							break;
 						}
@@ -216,7 +216,7 @@ void show_group_msg()
 							continue;
 						}
 
-				    	if(my_strcmp(friend_list[i], "my_group") == 0)
+				    	if(strcmp(friend_list[i], "my_group") == 0)
 						{
 							break;
 						}
@@ -226,7 +226,7 @@ void show_group_msg()
 					usleep(500000);
 				}
 
-				while(my_strcmp(current_target, "group") != 0)
+				while(strcmp(current_target, "group") != 0)
 				{
 					for(i = 1 ; i < 30; i++)
 					{
@@ -235,7 +235,7 @@ void show_group_msg()
 							continue;
 						}
 
-		    			if(my_strcmp(friend_list[i], "group") == 0)
+		    			if(strcmp(friend_list[i], "group") == 0)
 						{
 							break;
 						}
@@ -275,7 +275,7 @@ void show_group_msg()
 			temp = group_msg_head->next;
 			while(temp != NULL)
 			{
-				if(my_strcmp(temp->target, "group") == 0)
+				if(strcmp(temp->target, "group") == 0)
 				{
 					if(chat_row == 14 || chat_row == 15)
 					{
@@ -287,7 +287,7 @@ void show_group_msg()
 					if(update_time(temp->time) == YES)
 					{
 						chat_row -= 1;
-						mvwprintw(chat_win[2], chat_row++, (49 - my_strlen(temp->time)) / 2, "%s", temp->time);
+						mvwprintw(chat_win[2], chat_row++, (49 - strlen(temp->time)) / 2, "%s", temp->time);
 					}
 					mvwprintw(chat_win[2], chat_row++, 0, "[^_^] %s : %s", temp->user, temp->message);
 					chat_row++;
@@ -357,12 +357,12 @@ void recv_msg()
 				//保存好友状态到链表中
 				friend = (Friend *)malloc(sizeof(Friend));
 				friend->state = back_msg.state;
-				my_strcpy(friend->user, back_msg.user);
-				my_strcpy(friend->signature, back_msg.signature);
+				strcpy(friend->user, back_msg.user);
+				strcpy(friend->signature, back_msg.signature);
 				insert_friend_list(&friend);
 				
 				bzero(user, sizeof(user));
-				my_strcpy(user, back_msg.user);
+				strcpy(user, back_msg.user);
 				pthread_create(&friend_id[k++], NULL, (void *)show_msg, &user);
 				usleep(100000);
 				break;
@@ -374,7 +374,7 @@ void recv_msg()
 				temp = friend_head->next;		//修改好友状态
 				while(temp != NULL)
 				{
-				    if(my_strcmp(temp->user, back_msg.user) == 0)
+				    if(strcmp(temp->user, back_msg.user) == 0)
 					{
 					    temp->state = FRIEND_ONLINE;
 						break;
@@ -395,7 +395,7 @@ void recv_msg()
 				temp = friend_head->next;		//修改好友的状态
 				while(temp != NULL)
 				{
-				    if(my_strcmp(temp->user, back_msg.user) == 0)
+				    if(strcmp(temp->user, back_msg.user) == 0)
 					{
 					    temp->state = FRIEND_OFFLINE;
 						break;
@@ -423,9 +423,9 @@ void recv_msg()
 				if(update_time(back_msg.time) == YES)
 				{
 					chat_row -= 1;
-					mvwprintw(chat_win[2], chat_row++, (49 - my_strlen(back_msg.time)) / 2, "%s", back_msg.time);
+					mvwprintw(chat_win[2], chat_row++, (49 - strlen(back_msg.time)) / 2, "%s", back_msg.time);
 				}
-				mvwprintw(chat_win[2], chat_row++, (49 - my_strlen(back_msg.message) - 6), "%s [^_^]", back_msg.message);
+				mvwprintw(chat_win[2], chat_row++, (49 - strlen(back_msg.message) - 6), "%s [^_^]", back_msg.message);
 				chat_row++;
 				wrefresh(chat_win[2]);
 			    break;
@@ -434,7 +434,7 @@ void recv_msg()
 			//当收到好友消息时
 			case CHAT:
 			{
-				if(my_strcmp(back_msg.user, current_target) == 0)  	//如果收到当前聊天对象发来消息
+				if(strcmp(back_msg.user, current_target) == 0)  	//如果收到当前聊天对象发来消息
 				{
 					if(chat_row == 14 || chat_row == 15)
 					{
@@ -446,7 +446,7 @@ void recv_msg()
 					if(update_time(back_msg.time) == YES)
 					{
 						chat_row -= 1;
-						mvwprintw(chat_win[2], chat_row++, (49 - my_strlen(back_msg.time)) / 2, "%s", back_msg.time);
+						mvwprintw(chat_win[2], chat_row++, (49 - strlen(back_msg.time)) / 2, "%s", back_msg.time);
 					}
 					mvwprintw(chat_win[2], chat_row++, 0, "[^_^] %s", back_msg.message);
 					chat_row++;
@@ -457,9 +457,9 @@ void recv_msg()
 				{
 					chat_msg = (Chat_Msg *)malloc(sizeof(Chat_Msg));
 					bzero(chat_msg, sizeof(chat_msg));
-					my_strcpy(chat_msg->user, back_msg.user);
-					my_strcpy(chat_msg->message, back_msg.message);
-					my_strcpy(chat_msg->time, back_msg.time);
+					strcpy(chat_msg->user, back_msg.user);
+					strcpy(chat_msg->message, back_msg.message);
+					strcpy(chat_msg->time, back_msg.time);
 					insert_chat_msg(&chat_msg);
 					chat_msg_mark = 1;
 				    pthread_cond_signal(&cond1);
@@ -472,10 +472,10 @@ void recv_msg()
 			{
 				chat_msg = (Chat_Msg *)malloc(sizeof(Chat_Msg));
 				bzero(chat_msg, sizeof(chat_msg));
-				my_strcpy(chat_msg->user, back_msg.user);
-			//	my_strcpy(chat_msg->target, back_msg.target);
-				my_strcpy(chat_msg->message, back_msg.message);
-				my_strcpy(chat_msg->time, back_msg.time);
+				strcpy(chat_msg->user, back_msg.user);
+			//	strcpy(chat_msg->target, back_msg.target);
+				strcpy(chat_msg->message, back_msg.message);
+				strcpy(chat_msg->time, back_msg.time);
 				insert_chat_msg(&chat_msg);
 				chat_msg_mark = 1;
 			    pthread_cond_signal(&cond1);
@@ -561,10 +561,10 @@ void recv_msg()
 				if(update_time(back_msg.time) == YES)
 				{
 					chat_row -= 1;
-					mvwprintw(chat_win[2], chat_row++, (49 - my_strlen(back_msg.time)) / 2, "%s", back_msg.time);
+					mvwprintw(chat_win[2], chat_row++, (49 - strlen(back_msg.time)) / 2, "%s", back_msg.time);
 				}
 					
-				mvwprintw(chat_win[2], chat_row++, (49 - my_strlen(back_msg.file_name) - 14 - 9), "[%s] (成功发送文件) [^_^]", back_msg.file_name);
+				mvwprintw(chat_win[2], chat_row++, (49 - strlen(back_msg.file_name) - 14 - 9), "[%s] (成功发送文件) [^_^]", back_msg.file_name);
 				chat_row++;
 				wrefresh(chat_win[2]);
 				break;
@@ -583,10 +583,10 @@ void recv_msg()
 				if(update_time(back_msg.time) == YES)
 				{
 					chat_row -= 1;
-					mvwprintw(chat_win[2], chat_row++, (49 - my_strlen(back_msg.time)) / 2, "%s", back_msg.time);
+					mvwprintw(chat_win[2], chat_row++, (49 - strlen(back_msg.time)) / 2, "%s", back_msg.time);
 				}
 				
-				mvwprintw(chat_win[2], chat_row++, (49 - my_strlen(back_msg.file_name) - 23 - 9), "[%s] [对方离线] 发送文件失败 [^_^]", back_msg.file_name);
+				mvwprintw(chat_win[2], chat_row++, (49 - strlen(back_msg.file_name) - 23 - 9), "[%s] [对方离线] 发送文件失败 [^_^]", back_msg.file_name);
 				chat_row++;
 				wrefresh(chat_win[2]);
 				break;
@@ -607,7 +607,7 @@ void recv_msg()
 					exit(1);
 				}
 					
-				if(my_strcmp(back_msg.user, current_target) == 0)  	//如果收到当前聊天对象发来文件
+				if(strcmp(back_msg.user, current_target) == 0)  	//如果收到当前聊天对象发来文件
 				{
 					if(chat_row == 14 || chat_row == 15)
 					{
@@ -618,7 +618,7 @@ void recv_msg()
 					if(update_time(back_msg.time) == YES)
 					{
 						chat_row -= 1;
-						mvwprintw(chat_win[2], chat_row++, (49 - my_strlen(back_msg.time)) / 2, "%s", back_msg.time);
+						mvwprintw(chat_win[2], chat_row++, (49 - strlen(back_msg.time)) / 2, "%s", back_msg.time);
 					}
 					mvwprintw(chat_win[2], chat_row++, 0, "[^_^] [%s] (成功接收文件)", back_msg.file_name);
 					chat_row++;
@@ -629,10 +629,10 @@ void recv_msg()
 				{
 					chat_msg = (Chat_Msg *)malloc(sizeof(Chat_Msg));
 					bzero(chat_msg, sizeof(chat_msg));
-					my_strcpy(chat_msg->user, back_msg.user);
-					my_strcpy(chat_msg->target, back_msg.file_name);
-					my_strcpy(chat_msg->message, back_msg.message);
-					my_strcpy(chat_msg->time, back_msg.time);
+					strcpy(chat_msg->user, back_msg.user);
+					strcpy(chat_msg->target, back_msg.file_name);
+					strcpy(chat_msg->message, back_msg.message);
+					strcpy(chat_msg->time, back_msg.time);
 					insert_chat_msg(&chat_msg);
 					chat_msg_mark = 1;
 				    pthread_cond_signal(&cond1);
@@ -644,7 +644,7 @@ void recv_msg()
 			//当收到修改昵称成功的通知时
 			case MODIFY_NICKNAME_OK:
 			{
-				my_strcpy(current_user, back_msg.user);
+				strcpy(current_user, back_msg.user);
 				mvwprintw(manage_win[0], 13, 17, "修改昵称中...");
 				wrefresh(manage_win[0]);
 				sleep(1);
@@ -678,9 +678,9 @@ void recv_msg()
 				temp = friend_head->next;
 				while(temp != NULL)
 				{
-					if(my_strcmp(temp->user, back_msg.user) == 0)
+					if(strcmp(temp->user, back_msg.user) == 0)
 					{
-						my_strcpy(temp->user, back_msg.target);
+						strcpy(temp->user, back_msg.target);
 						break;
 					}
 					temp = temp->next;
@@ -698,7 +698,7 @@ void recv_msg()
 			case MODIFY_SIGNATURE:
 			{
 				//如果好友当前正在聊天界面,直接修改
-				if(my_strcmp(back_msg.target, current_target) == 0)
+				if(strcmp(back_msg.target, current_target) == 0)
 				{
 					getyx(chat_win[0], y, x);
 					mvwprintw(chat_win[0], 3, 3, "                                      "); 
@@ -710,10 +710,10 @@ void recv_msg()
 				temp = friend_head->next;
 				while(temp != NULL)
 				{
-				    if(my_strcmp(temp->user, back_msg.target) == 0)
+				    if(strcmp(temp->user, back_msg.target) == 0)
 					{
 					    bzero(temp->signature, sizeof(temp->signature));
-						my_strcpy(temp->signature, back_msg.signature);
+						strcpy(temp->signature, back_msg.signature);
 					}
 						
 					temp = temp->next;
@@ -734,9 +734,9 @@ void recv_msg()
 				if(update_time(back_msg.time) == YES)
 				{
 					chat_row -= 1;
-					mvwprintw(chat_win[2], chat_row++, (49 - my_strlen(back_msg.time)) / 2, "%s", back_msg.time);
+					mvwprintw(chat_win[2], chat_row++, (49 - strlen(back_msg.time)) / 2, "%s", back_msg.time);
 				}
-				mvwprintw(chat_win[2], chat_row++, (49 - my_strlen(back_msg.message) - 6), "%s [^_^]", back_msg.message, back_msg.user);
+				mvwprintw(chat_win[2], chat_row++, (49 - strlen(back_msg.message) - 6), "%s [^_^]", back_msg.message, back_msg.user);
 				chat_row++;
 				wrefresh(chat_win[2]);
 			    break;
@@ -745,9 +745,9 @@ void recv_msg()
 			//当接受到群聊信息时
 			case SEND_GROUP_MSG:
 			{
-				if(my_strcmp(back_msg.user, current_user) != 0)
+				if(strcmp(back_msg.user, current_user) != 0)
 				{
-					if(my_strcmp(current_target, "group") == 0)   	//如果当前在群组聊天
+					if(strcmp(current_target, "group") == 0)   	//如果当前在群组聊天
 					{
 						if(chat_row == 14 || chat_row == 15)
 						{
@@ -759,7 +759,7 @@ void recv_msg()
 						if(update_time(back_msg.time) == YES)
 						{
 							chat_row -= 1;
-							mvwprintw(chat_win[2], chat_row++, (49 - my_strlen(back_msg.time)) / 2, "%s", back_msg.time);
+							mvwprintw(chat_win[2], chat_row++, (49 - strlen(back_msg.time)) / 2, "%s", back_msg.time);
 						}
 						mvwprintw(chat_win[2], chat_row++, 0, "[^_^] %s : %s", back_msg.user, back_msg.message);
 						chat_row++;
@@ -769,10 +769,10 @@ void recv_msg()
 					{
 						chat_msg = (Chat_Msg *)malloc(sizeof(Chat_Msg));
 						bzero(chat_msg, sizeof(chat_msg));
-						my_strcpy(chat_msg->user, back_msg.user);
-						my_strcpy(chat_msg->target, "group");
-						my_strcpy(chat_msg->message, back_msg.message);
-						my_strcpy(chat_msg->time, back_msg.time);
+						strcpy(chat_msg->user, back_msg.user);
+						strcpy(chat_msg->target, "group");
+						strcpy(chat_msg->message, back_msg.message);
+						strcpy(chat_msg->time, back_msg.time);
 						insert_group_msg(&chat_msg);
 						group_msg_mark = 1;
 				  		pthread_cond_signal(&cond2);
@@ -786,10 +786,10 @@ void recv_msg()
 			{
 				chat_msg = (Chat_Msg *)malloc(sizeof(Chat_Msg));
 				bzero(chat_msg, sizeof(chat_msg));
-				my_strcpy(chat_msg->user, back_msg.user);
-				my_strcpy(chat_msg->target, "group");
-				my_strcpy(chat_msg->message, back_msg.message);
-				my_strcpy(chat_msg->time, back_msg.time);
+				strcpy(chat_msg->user, back_msg.user);
+				strcpy(chat_msg->target, "group");
+				strcpy(chat_msg->message, back_msg.message);
+				strcpy(chat_msg->time, back_msg.time);
 				insert_group_msg(&chat_msg);
 				group_msg_mark = 1;
 			    pthread_cond_signal(&cond2);
@@ -799,19 +799,19 @@ void recv_msg()
 			//当收到群通知时
 			case GROUP_NOTICE:
 			{
-				if(my_strlen(back_msg.message) == 0)
+				if(strlen(back_msg.message) == 0)
 				{
 					wclear(chat_win[9]);
 					mvwprintw(chat_win[9], 0, 0, "暂无群通知")	;
 					wrefresh(chat_win[9]);
-					my_strcpy(current_group_notice, "暂无群通知");
+					strcpy(current_group_notice, "暂无群通知");
 				}
 				else
 				{
 					wclear(chat_win[9]);
 					mvwprintw(chat_win[9], 0, 0, "%s", back_msg.message);
 					wrefresh(chat_win[9]);
-					my_strcpy(current_group_notice, back_msg.message);
+					strcpy(current_group_notice, back_msg.message);
 				}
 			    break;
 			}
@@ -823,8 +823,8 @@ void recv_msg()
 			    mvwprintw(chat_win[9], 0, 1, "匿名身份");
 			    mvwprintw(chat_win[9], 1, 1, " %s", back_msg.user);
 				wrefresh(chat_win[9]);
-				my_strcpy(casual_user, current_user);
-				my_strcpy(current_user, back_msg.user);
+				strcpy(casual_user, current_user);
+				strcpy(current_user, back_msg.user);
 			    break;
 			}
 
@@ -834,7 +834,7 @@ void recv_msg()
 			    wclear(chat_win[9]);
 				mvwprintw(chat_win[9], 0, 0, "%s", current_group_notice);
 				wrefresh(chat_win[9]);
-				my_strcpy(current_user, casual_user);
+				strcpy(current_user, casual_user);
 				break;
 			}
 

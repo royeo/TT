@@ -37,10 +37,10 @@ void edit_data()
 	bzero(&msg, sizeof(msg));
 	mvwscanw(manage_win[1], 1, 2, "%s", msg.target);
 
-	if(my_strlen(msg.target) > 0)
+	if(strlen(msg.target) > 0)
 	{
 		msg.action = MODIFY_NICKNAME;
-		my_strcpy(msg.user, current_user);
+		strcpy(msg.user, current_user);
 
 		if(send(sockfd, &msg, sizeof(msg), 0) == -1)
 		{
